@@ -6,14 +6,9 @@ export function useTags(storageName = 'tags') {
   const orderedTags = computed(() => tags.value.sort());
 
   function addTag(tag) {
-    // tag are always in uppercase letter
-    tag = tag.toUpperCase();
-    // trim whitespace
-    tag = tag.trim();
-    // tag must be unique
-    if (tags.value.includes(tag)) {
-      return;
-    }
+    tag = tag.toUpperCase().trim();
+    if (tag === '') return;
+    if (tags.value.includes(tag)) return;
     tags.value.push(tag);
   }
 

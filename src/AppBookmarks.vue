@@ -47,4 +47,12 @@
     box-sizing: border-box;
     font-family: Verdana, sans-serif;
   }
+  a {
+    text-decoration: none;
+    color: tomato;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
 </style>
