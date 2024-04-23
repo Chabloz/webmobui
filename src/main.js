@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-// import App from './AppTemperature.vue';
-import App from './AppBookmarks.vue';
+import App from './AppTemperature.vue';
 
 createApp(App).mount('#app');
