@@ -9,8 +9,8 @@ export const {
 } = useTags();
 
 // addTag('JS');
-addTag('Js');
+// addTag('Js');
 // addTag(' js  ');
-addTag('PHP');
+// addTag('PHP');
 // removeTag('Js');
 // console.log(orderedTags.value); // ["JS", "PHP"]

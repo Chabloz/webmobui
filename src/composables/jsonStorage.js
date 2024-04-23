@@ -1,5 +1,5 @@
 import { ref, watch } from "vue";
-import * as jsonStorage from "../utils/jsonStroage.js";
+import * as jsonStorage from "../utils/jsonStorage.js";
 
 export function useJsonStorage(key, defaultValue) {
   const data = ref(defaultValue);

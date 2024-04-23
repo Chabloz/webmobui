@@ -8,21 +8,13 @@
     },
   });
 
-  // Create a computed unique color for the label props
-  // genberate a random HSL color fomr the label props
-  const randomColor = computed(() => {
-    const hue = Math.abs(hashCode(props.label)) % 360;
-    console.log(hue);
-    return `hsl(${hue}, 100%, 90%)`;
+  const color = computed(() => {
+    const hash = Array.from(props.label).reduce((acc, char) => char.charCodeAt(0) + ((acc << 5) - acc), 0);
+    const hue = hash % 360;
+    // determine the lightness based on the active prop
+    const lightness = 50;
+    return `hsl(${hue}, 70%, ${lightness}%)`;
   });
-
-  function hashCode(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return hash;
-  }
 
 </script>
 
@@ -33,10 +25,11 @@
 <style scoped>
   span {
     display: inline-block;
-    background-color: v-bind(randomColor);
+    background-color: v-bind(color);
     color: white;
     padding: 0.5rem;
     margin: 0.25rem;
     border-radius: 1rem;
+    text-align: center;
   }
 </style>
