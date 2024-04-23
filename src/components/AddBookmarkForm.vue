@@ -1,0 +1,53 @@
+<script setup>
+  import BaseButton from './BaseButton.vue';
+  import BaseInput from './BaseInput.vue';
+  import { addBookmark, orderedTags } from '../stores/bookmarks.js';
+  import BaseBadge from './BaseBadge.vue';
+  import { ref } from 'vue';
+
+  const title = defineModel('title');
+  const url = defineModel('url');
+  const tags = ref([]);
+
+  function addNewBookmark() {
+    addBookmark({ title: title.value, url: url.value, tags: tags.value});
+    title.value = '';
+    url.value = '';
+    tags.value = [];
+  }
+
+  function toogleTag(tag) {
+    if (tags.value.includes(tag)) {
+      tags.value = tags.value.filter((t) => t !== tag);
+    } else {
+      tags.value.push(tag);
+    }
+  }
+</script>
+
+<template>
+  <form @submit.prevent="addNewBookmark()">
+    <BaseInput v-model="title" type="text" required placeholder="title" />
+    <BaseInput v-model="url" type="url" required placeholder="https://" />
+    <div>
+      <BaseBadge
+        v-for="tag of orderedTags"
+        :label="tag"
+        :active="tags.includes(tag)"
+        @click="toogleTag(tag)"
+      ></BaseBadge>
+    </div>
+    <BaseButton>Add</BaseButton>
+  </form>
+</template>
+
+<style scoped>
+  form {
+    display: grid;
+    gap: 1rem
+  }
+  form > div {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>

@@ -13,7 +13,7 @@
     '#tags': {
       component: TheTasksList,
       label: 'Tags',
-    },
+    }
   }
 
   const currentPath = ref(window.location.hash)
