@@ -36,7 +36,7 @@
     <p v-if="filteredBookmarks.length === 0">No bookmarks found</p>
     <div class="grid-3-col">
       <template v-for="bookmark in filteredBookmarks">
-        <a href="bookmark.url" target="_blank">
+        <a :href="bookmark.url" target="_blank">
           <img :src="`https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${bookmark.url}&size=16`">{{ bookmark.title }}
         </a>
         <BaseButton @click="removeBookmark(bookmark)">✖</BaseButton>
