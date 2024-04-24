@@ -36,5 +36,7 @@
     margin: 0.25rem;
     border-radius: 1rem;
     text-align: center;
+    font-size: 0.75rem;
+    user-select: none;
   }
 </style>

@@ -16,20 +16,28 @@
     }
   }
 
-  const currentPath = ref(window.location.hash)
-  window.addEventListener('hashchange', () => {
-    currentPath.value = window.location.hash
-  })
+  const currentPath = ref(window.location.hash);
+  updateCurrentPath();
+
+  function updateCurrentPath() {
+    const path = window.location.hash;
+    currentPath.value = routes[path] ? path : '#bookmarks';
+  }
+
+  window.addEventListener('hashchange', updateCurrentPath);
 
   const currentView = computed(() => {
-    return routes[currentPath.value]?.component ?? TheBookmarksList;
+    return routes[currentPath.value].component;
   })
 </script>
 
 <template>
   <TheHeader>Bookmarks</TheHeader>
-  <TheNav :routes="routes" />
-  <component :is="currentView" />
+  <TheNav :routes="routes" :currentPath="currentPath"/>
+  <main>
+    <component :is="currentView" />
+  </main>
+
 </template>
 
 <style>
@@ -38,5 +46,18 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+a {
+  text-decoration: none;
+  color: tomato;
+}
+a:hover {
+  text-decoration: underline;
+}
+a:active {
+  text-decoration: underline;
+}
+main {
+  padding: 0 1rem;
 }
 </style>

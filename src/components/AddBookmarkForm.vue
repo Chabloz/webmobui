@@ -1,12 +1,14 @@
 <script setup>
-  import BaseButton from './BaseButton.vue';
-  import BaseInput from './BaseInput.vue';
-  import { addBookmark, orderedTags } from '../stores/bookmarks.js';
-  import BaseBadge from './BaseBadge.vue';
   import { ref } from 'vue';
 
-  const title = defineModel('title');
-  const url = defineModel('url');
+  import { addBookmark, orderedTags } from '../stores/bookmarks.js';
+
+  import BaseButton from './BaseButton.vue';
+  import BaseInput from './BaseInput.vue';
+  import AppTagsSelectors from './AppTagsSelectors.vue';
+
+  const title = ref('');
+  const url = ref('');
   const tags = ref([]);
 
   function addNewBookmark() {
@@ -27,16 +29,9 @@
 
 <template>
   <form @submit.prevent="addNewBookmark()">
-    <BaseInput v-model="title" type="text" required placeholder="title" />
-    <BaseInput v-model="url" type="url" required placeholder="https://" />
-    <div>
-      <BaseBadge
-        v-for="tag of orderedTags"
-        :label="tag"
-        :active="tags.includes(tag)"
-        @click="toogleTag(tag)"
-      ></BaseBadge>
-    </div>
+    <BaseInput v-model="title" type="text" required placeholder="title" name="title" />
+    <BaseInput v-model="url" type="url" required placeholder="https://" name="url" />
+    <AppTagsSelectors v-model="tags" />
     <BaseButton>Add</BaseButton>
   </form>
 </template>
@@ -49,5 +44,6 @@
   form > div {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
 </style>

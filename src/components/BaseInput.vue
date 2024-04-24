@@ -12,5 +12,6 @@
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     margin-right: 0.5rem;
+    min-width: min(18rem, 90vw);
   }
 </style>

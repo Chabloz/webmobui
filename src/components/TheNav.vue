@@ -4,6 +4,10 @@
      type: Object,
      required: true,
     },
+    currentPath: {
+      type: String,
+      required: true,
+    },
   })
 </script>
 
@@ -11,7 +15,7 @@
   <nav>
     <ul>
       <li v-for="(route, key) in routes" :key="key">
-        <a :href="key">{{ route.label }}</a>
+        <a :href="key" :class="{ active: key === currentPath }">{{ route.label }}</a>
       </li>
     </ul>
   </nav>
@@ -31,12 +35,15 @@
   li {
     display: inline;
     margin-right: 1rem;
+    padding-right: 1rem;
+  }
+  li:not(:last-child) {
+    border-right: 1px solid white;
   }
   a {
     color: white;
-    text-decoration: none;
   }
-  a:hover {
-    text-decoration: underline;
+  a.active {
+    font-weight: bold;
   }
 </style>
